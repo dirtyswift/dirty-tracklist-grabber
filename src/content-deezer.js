@@ -12,12 +12,10 @@
   const SEL_ARTISTE = '[data-testid="artist"]';
 
   // Nom de l'artiste de la page courante (si on est sur /artist/xxx).
+  // Sur Deezer, pas de h1 : le nom de l'artiste est le premier h2 de la page.
   function artisteDeLaPage() {
     if (!/\/artist\//.test(location.pathname)) return null;
-    // Deezer expose le nom de l'artiste dans un h1 de la page.
-    const el = document.querySelector('h1[data-testid="artist-page-title"]')
-      || document.querySelector('.artist-title')
-      || document.querySelector('main h1');
+    const el = document.querySelector('h2');
     return el?.textContent.trim() || null;
   }
 
