@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Dirty Tracklist Grabber",
+  "version": "0.1.0",
+  "description": "Copie la tracklist visible de Spotify ou Deezer dans le presse-papier au format 'Artiste - Titre'.",
+  "content_scripts": [
+    {
+      "matches": ["*://open.spotify.com/*"],
+      "js": ["content-spotify.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://www.deezer.com/*"],
+      "js": ["content-deezer.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
