@@ -67,6 +67,39 @@
     if (btn) btn.textContent = `Copier tracklist (${tracks.size})`;
   }
 
+  // Extrait l'ID de ressource de l'URL (playlist ou artiste). Null ailleurs.
+  function idRessource(pathname) {
+    const m = pathname.match(/\/(playlist|artist)\/([^/?#]+)/);
+    return m ? `${m[1]}:${m[2]}` : null;
+  }
+
+  // Patch de history pour émettre un événement à chaque pushState/replaceState
+  function installerHookNavigation() {
+    const evt = "dtg:navchange";
+    ["pushState", "replaceState"].forEach((fn) => {
+      const orig = history[fn];
+      history[fn] = function (...args) {
+        const ret = orig.apply(this, args);
+        window.dispatchEvent(new Event(evt));
+        return ret;
+      };
+    });
+    window.addEventListener("popstate", () => window.dispatchEvent(new Event(evt)));
+
+    let ressourceCourante = idRessource(location.pathname);
+    window.addEventListener(evt, () => {
+      const nouvelle = idRessource(location.pathname);
+      if (nouvelle !== ressourceCourante && nouvelle !== null) {
+        ressourceCourante = nouvelle;
+        tracks.clear();
+        majCompteur();
+        console.log(`${TAG} changement de page → reset (${nouvelle})`);
+        // Après un changement de page, scan initial pour rattraper
+        setTimeout(scanRowsExistantes, 500);
+      }
+    });
+  }
+
   // Construction du bouton flottant
   function creerBouton() {
     if (document.getElementById("dtg-root")) return; // idempotent
@@ -129,6 +162,7 @@
   creerBouton();
   scanRowsExistantes();
   demarrerObservateur();
+  installerHookNavigation();
   // Polling — Spotify réutilise les mêmes nœuds DOM au scroll (virtual scroll par transform),
   // le MutationObserver ne voit pas les changements. Un re-scan périodique rattrape.
   setInterval(scanRowsExistantes, 500);
