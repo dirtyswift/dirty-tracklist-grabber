@@ -8,7 +8,7 @@
   // Sélecteurs Spotify
   const SEL_ROW = '[data-testid="tracklist-row"]';
   const SEL_TITRE = '[data-testid="internal-track-link"]';
-  const SEL_ARTISTE = 'a[href^="/artist/"]';
+  const SEL_ARTISTE = 'a[href*="/artist/"]';
 
   // Extraction d'une row en {artistes, titre}. Null si ligne incomplète.
   function extraireTrack(row) {
