@@ -79,14 +79,50 @@
     reset.type = "button";
     reset.textContent = "×";
     reset.title = "Réinitialiser la liste";
+    reset.addEventListener("click", gererReset);
 
     const copy = document.createElement("button");
     copy.id = "dtg-copy";
     copy.type = "button";
     copy.textContent = `Copier tracklist (${tracks.size})`;
+    copy.addEventListener("click", gererCopie);
 
     root.append(reset, copy);
     document.body.appendChild(root);
+  }
+
+  async function gererCopie() {
+    const btn = document.getElementById("dtg-copy");
+    if (!btn) return;
+    if (tracks.size === 0) {
+      flashBouton("Rien à copier");
+      return;
+    }
+    const lignes = [...tracks].map((cle) => cle.replace("|", " - "));
+    try {
+      await navigator.clipboard.writeText(lignes.join("\n"));
+      flashBouton("Copié ✓");
+    } catch (err) {
+      console.error(`${TAG} échec clipboard`, err);
+      flashBouton("Erreur copie");
+    }
+  }
+
+  function gererReset() {
+    tracks.clear();
+    majCompteur();
+    console.log(`${TAG} liste vidée`);
+  }
+
+  function flashBouton(texte) {
+    const btn = document.getElementById("dtg-copy");
+    if (!btn) return;
+    btn.textContent = texte;
+    btn.classList.add("dtg-flash");
+    setTimeout(() => {
+      btn.classList.remove("dtg-flash");
+      majCompteur();
+    }, 1500);
   }
 
   // Init
