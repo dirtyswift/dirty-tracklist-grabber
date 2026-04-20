@@ -1,23 +1,39 @@
 # dirty-tracklist-grabber
 
-Plugin Chrome (dev mode local) qui extrait la tracklist d'une page Spotify ou Deezer et la copie dans le presse-papier au format "Artiste - Titre" — pour coller directement dans Apple Music.
+Extension Chrome locale qui copie la tracklist visible d'une page Spotify ou Deezer dans le presse-papier, au format `Artiste - Titre` (une ligne par morceau). Conçue pour passer en 1 clic du digging à l'achat sur Apple Music.
 
-## Quick start
+## Installation (mode développeur)
 
-```bash
-# 1. Aller dans le dossier
-cd dirty-tracklist-grabber/src
+1. Ouvrir Chrome → `chrome://extensions/`
+2. Activer "Mode développeur" en haut à droite
+3. Cliquer "Charger l'extension non empaquetée"
+4. Sélectionner le dossier `src/` de ce projet
 
-# 2. Ouvrir Chrome → chrome://extensions/
-# 3. Activer "Mode développeur" (toggle haut droite)
-# 4. Cliquer "Charger l'extension non empaquetée" → sélectionner le dossier src/
-# 5. Aller sur Spotify ou Deezer → cliquer l'icône de l'extension → "Copier tracklist"
-```
+## Utilisation
 
-## Contexte complet
+1. Ouvrir une playlist ou une page artiste sur `open.spotify.com` ou `www.deezer.com`
+2. Scroller jusqu'en bas — le compteur du bouton noir en bas à droite monte en temps réel
+3. Cliquer `Copier tracklist (N)` → le presse-papier contient les N tracks
+4. Coller dans Apple Music (ou n'importe quel champ de recherche)
 
-Voir [BRIEF.md](./BRIEF.md).
+Le bouton `×` vide la liste manuellement. La liste se vide aussi automatiquement quand on change de playlist ou d'artiste.
 
-## Règles projet
+Le bouton adopte la couleur de la plateforme au survol (vert Spotify, violet Deezer).
 
-Voir [CLAUDE.md](./CLAUDE.md).
+## Pages supportées
+
+- Spotify : `/playlist/<id>` et `/artist/<id>` (y compris avec préfixe de locale type `/intl-fr/`)
+- Deezer : `/playlist/<id>` et `/artist/<id>` (y compris avec préfixe de locale type `/fr/`)
+
+## Limites connues
+
+- Il faut scroller manuellement pour voir toutes les tracks (virtual scrolling Spotify). Le plugin ne scrolle pas tout seul.
+- Les classes et structures DOM des sites ciblés changent régulièrement. Si le plugin casse, c'est attendu et c'est OK pour un usage perso.
+- Manifest V3, Chrome en mode développeur uniquement. Pas de Safari, pas de Store.
+
+## Documentation
+
+- `BRIEF.md` : problème, scope, signaux de succès/échec
+- `CLAUDE.md` : règles projet et stratégie de DOM scraping
+- `docs/superpowers/specs/` : spec de design V1
+- `docs/superpowers/plans/` : plan d'implémentation V1
