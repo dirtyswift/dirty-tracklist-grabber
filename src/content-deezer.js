@@ -143,7 +143,7 @@
     const lignes = [...tracks].map((cle) => cle.replace("|", " - "));
     try {
       await navigator.clipboard.writeText(lignes.join("\n"));
-      flashBouton("Copié ✓");
+      flashBouton("Copié ✓ VA LEURE DIRE");
     } catch (err) {
       console.error(`${TAG} échec clipboard`, err);
       flashBouton("Erreur copie");
