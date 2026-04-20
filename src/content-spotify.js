@@ -93,5 +93,8 @@
   creerBouton();
   scanRowsExistantes();
   demarrerObservateur();
+  // Polling — Spotify réutilise les mêmes nœuds DOM au scroll (virtual scroll par transform),
+  // le MutationObserver ne voit pas les changements. Un re-scan périodique rattrape.
+  setInterval(scanRowsExistantes, 500);
   console.log(`${TAG} Spotify prêt`);
 })();
