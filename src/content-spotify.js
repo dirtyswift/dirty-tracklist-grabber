@@ -10,18 +10,33 @@
   const SEL_TITRE = '[data-testid="internal-track-link"]';
   const SEL_ARTISTE = 'a[href*="/artist/"]';
 
+  // Nom de l'artiste de la page courante (si on est sur /artist/xxx).
+  // Les pages artiste n'incluent pas les liens artiste dans leurs rows de tracks.
+  function artisteDeLaPage() {
+    if (!/\/artist\//.test(location.pathname)) return null;
+    const el = document.querySelector('[data-testid="adaptiveEntityTitle"]');
+    return el?.textContent.trim() || null;
+  }
+
   // Extraction d'une row en {artistes, titre}. Null si ligne incomplète.
   function extraireTrack(row) {
     const titreEl = row.querySelector(SEL_TITRE);
-    const artisteEls = row.querySelectorAll(SEL_ARTISTE);
-    if (!titreEl || artisteEls.length === 0) return null;
+    if (!titreEl) return null;
 
     const titre = titreEl.textContent.trim();
-    const artistes = [...artisteEls]
+    if (!titre) return null;
+
+    let artistes = [...row.querySelectorAll(SEL_ARTISTE)]
       .map((a) => a.textContent.trim())
       .filter(Boolean);
 
-    if (!titre || artistes.length === 0) return null;
+    // Fallback page artiste : pas de lien artiste dans la row, on prend le nom de la page.
+    if (artistes.length === 0) {
+      const pageArtiste = artisteDeLaPage();
+      if (pageArtiste) artistes = [pageArtiste];
+    }
+
+    if (artistes.length === 0) return null;
     return { artistes, titre };
   }
 
