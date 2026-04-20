@@ -110,6 +110,7 @@
 
     const root = document.createElement("div");
     root.id = "dtg-root";
+    root.dataset.service = "spotify";
 
     const reset = document.createElement("button");
     reset.id = "dtg-reset";

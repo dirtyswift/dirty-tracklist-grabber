@@ -28,12 +28,18 @@
   background: #333;
 }
 
-#dtg-copy:hover { background: #1db954; }
+#dtg-root[data-service="spotify"] #dtg-copy:hover { background: #1db954; }
+#dtg-root[data-service="deezer"] #dtg-copy:hover { background: #a238ff; }
 #dtg-reset:hover { background: #555; }
 
 #dtg-copy:active, #dtg-reset:active { transform: scale(0.97); }
 
-#dtg-copy.dtg-flash {
+#dtg-root[data-service="spotify"] #dtg-copy.dtg-flash {
   background: #1db954;
+  color: #fff;
+}
+
+#dtg-root[data-service="deezer"] #dtg-copy.dtg-flash {
+  background: #a238ff;
   color: #fff;
 }

@@ -7,9 +7,9 @@
 
   // Sélecteurs Deezer (à ajuster si nécessaire au 1er test live)
   // La liste couvre plusieurs patterns possibles selon les sections (playlist, album, artiste).
-  const SEL_ROW = '[data-testid="track"], [role="row"][aria-rowindex]';
-  const SEL_TITRE = 'a[href*="/track/"], .track-title';
-  const SEL_ARTISTE = 'a[href*="/artist/"]';
+  const SEL_ROW = '[role="row"][aria-rowindex]';
+  const SEL_TITRE = '[data-testid="title"]';
+  const SEL_ARTISTE = '[data-testid="artist"]';
 
   // Nom de l'artiste de la page courante (si on est sur /artist/xxx).
   function artisteDeLaPage() {
@@ -114,6 +114,7 @@
 
     const root = document.createElement("div");
     root.id = "dtg-root";
+    root.dataset.service = "deezer";
 
     const reset = document.createElement("button");
     reset.id = "dtg-reset";
