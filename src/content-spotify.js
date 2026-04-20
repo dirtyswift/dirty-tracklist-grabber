@@ -73,31 +73,20 @@
     return m ? `${m[1]}:${m[2]}` : null;
   }
 
-  // Patch de history pour émettre un événement à chaque pushState/replaceState
+  // Polling de l'URL — les content scripts MV3 (isolated world) ne peuvent pas
+  // intercepter les history.pushState du main world. On surveille location.pathname.
   function installerHookNavigation() {
-    const evt = "dtg:navchange";
-    ["pushState", "replaceState"].forEach((fn) => {
-      const orig = history[fn];
-      history[fn] = function (...args) {
-        const ret = orig.apply(this, args);
-        window.dispatchEvent(new Event(evt));
-        return ret;
-      };
-    });
-    window.addEventListener("popstate", () => window.dispatchEvent(new Event(evt)));
-
     let ressourceCourante = idRessource(location.pathname);
-    window.addEventListener(evt, () => {
+    setInterval(() => {
       const nouvelle = idRessource(location.pathname);
       if (nouvelle !== ressourceCourante && nouvelle !== null) {
         ressourceCourante = nouvelle;
         tracks.clear();
         majCompteur();
         console.log(`${TAG} changement de page → reset (${nouvelle})`);
-        // Après un changement de page, scan initial pour rattraper
         setTimeout(scanRowsExistantes, 500);
       }
-    });
+    }, 500);
   }
 
   // Construction du bouton flottant
