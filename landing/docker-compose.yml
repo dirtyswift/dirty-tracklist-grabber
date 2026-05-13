@@ -1,0 +1,19 @@
+services:
+  grabber-landing:
+    build: .
+    container_name: grabber-landing
+    restart: unless-stopped
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-net"
+      - "traefik.http.routers.grabber-landing.rule=Host(`grabber.dirtyswift.com`)"
+      - "traefik.http.routers.grabber-landing.entrypoints=websecure"
+      - "traefik.http.routers.grabber-landing.tls=true"
+      - "traefik.http.routers.grabber-landing.tls.certresolver=myresolver"
+      - "traefik.http.services.grabber-landing.loadbalancer.server.port=3000"
+
+networks:
+  traefik-net:
+    external: true

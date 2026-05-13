@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #fc4501;
+  --color-brand-deep: #c93701;
+  --color-ink: #161310;
+  --color-ink-soft: #4a423b;
+  --color-paper: #fcf9f4;
+  --color-paper-warm: #f5ede0;
+  --color-spotify: #1ed760;
+  --color-deezer: #a238ff;
+
+  --font-display: var(--font-bricolage), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "Menlo", monospace;
+}
+
+@layer base {
+  :root {
+    --container-pad: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "ss02", "cv11";
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  html { scroll-behavior: auto; }
+}
