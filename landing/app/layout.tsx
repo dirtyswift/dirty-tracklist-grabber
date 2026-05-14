@@ -43,7 +43,6 @@ export const metadata: Metadata = {
     description:
       "Copie n'importe quelle tracklist Spotify ou Deezer dans ton presse-papier, en 1 clic.",
   },
-  icons: { icon: "/logo-128.png" },
 };
 
 export default function RootLayout({
