@@ -1,11 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { Bars } from "@/components/bars";
 import { LangToggle } from "@/components/lang-toggle";
 import { useLang } from "@/lib/lang-provider";
 
 const GITHUB_URL = "https://github.com/dirtyswift/dirty-tracklist-grabber";
+
+function LogoMark({ size = "size-8" }: { size?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={`flex ${size} items-center justify-center rounded-md bg-brand text-ink ring-1 ring-ink/10`}
+    >
+      <span className="block size-1/2">
+        <Bars />
+      </span>
+    </span>
+  );
+}
 
 export function SiteHeader() {
   const { t } = useLang();
@@ -13,13 +26,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/85 backdrop-blur-md">
       <div className="container-page flex items-center justify-between py-3.5">
         <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo-128.png"
-            alt=""
-            width={32}
-            height={32}
-            className="size-8 rounded-md ring-1 ring-ink/10"
-          />
+          <LogoMark />
           <span className="font-display text-base font-bold tracking-tight">
             Dirty Tracklist Grabber
           </span>
@@ -58,13 +65,7 @@ export function SiteFooter() {
       <div className="container-page flex flex-col items-start justify-between gap-6 text-sm text-ink/60 md:flex-row md:items-end">
         <div>
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo-128.png"
-              alt=""
-              width={28}
-              height={28}
-              className="size-7 rounded-md ring-1 ring-ink/10"
-            />
+            <LogoMark size="size-7" />
             <span className="font-display text-base font-bold text-ink">
               Dirty Tracklist Grabber
             </span>

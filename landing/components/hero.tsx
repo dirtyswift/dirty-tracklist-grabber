@@ -5,10 +5,8 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useRef } from "react";
 import { Bars } from "@/components/bars";
+import { EmailGate } from "@/components/email-gate";
 import { useLang } from "@/lib/lang-provider";
-
-const CHROME_STORE_URL = "#";
-const STORE_STATUS: "review" | "live" = "review";
 
 export function Hero() {
   const { t, lang } = useLang();
@@ -62,11 +60,9 @@ export function Hero() {
           >
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink" />
             {t.hero.kicker}
-            {STORE_STATUS === "review" && (
-              <span className="ml-1 rounded-sm bg-ink px-1.5 py-0.5 text-[9px] text-brand">
-                {t.hero.kickerStatus}
-              </span>
-            )}
+            <span className="ml-1 rounded-sm bg-ink px-1.5 py-0.5 text-[9px] text-brand">
+              {t.hero.kickerStatus}
+            </span>
           </span>
 
           <h1 className="overflow-hidden font-display font-bold leading-[0.92] tracking-[-0.04em] [font-size:clamp(3rem,9vw,7.75rem)]">
@@ -95,25 +91,11 @@ export function Hero() {
             {t.hero.subEnd}
           </p>
 
-          <div
-            data-anim="fade"
-            className="flex flex-wrap items-center gap-3 pt-2"
-          >
-            <a
-              href={CHROME_STORE_URL}
-              className="group inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3.5 text-base font-semibold text-paper transition hover:bg-ink/85"
-            >
-              {STORE_STATUS === "live" ? t.hero.ctaLive : t.hero.ctaSoon}
-              <span
-                aria-hidden
-                className="inline-block translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5"
-              >
-                →
-              </span>
-            </a>
+          <div data-anim="fade" className="flex flex-col gap-4 pt-2">
+            <EmailGate variant="hero" />
             <a
               href="#how"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-6 py-3 text-base font-semibold transition hover:bg-ink hover:text-paper"
+              className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-ink px-6 py-3 text-base font-semibold transition hover:bg-ink hover:text-paper"
             >
               {t.hero.ctaSecondary}
             </a>

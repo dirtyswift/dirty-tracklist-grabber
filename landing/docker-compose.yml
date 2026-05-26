@@ -3,6 +3,8 @@ services:
     build: .
     container_name: grabber-landing
     restart: unless-stopped
+    env_file:
+      - .env.production
     networks:
       - traefik-net
     labels:

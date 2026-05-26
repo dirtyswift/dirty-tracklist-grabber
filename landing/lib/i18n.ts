@@ -41,6 +41,15 @@ export type Dict = {
     cta: string;
   };
   cta: { title: string; sub: string; ctaSoon: string; ctaLive: string };
+  gate: {
+    placeholder: string;
+    submit: string;
+    loading: string;
+    success: string;
+    successHint: string;
+    error: string;
+    privacy: string;
+  };
   who: {
     tag: string;
     title: string;
@@ -74,7 +83,7 @@ export const dict: Record<Lang, Dict> = {
     },
     hero: {
       kicker: "Extension Chrome",
-      kickerStatus: "En review",
+      kickerStatus: "Disponible",
       title1: "Du digging",
       title2: "à l'achat,",
       title3: "en",
@@ -162,6 +171,15 @@ export const dict: Record<Lang, Dict> = {
       ctaSoon: "Bientôt sur le Chrome Web Store",
       ctaLive: "Ajouter à Chrome — gratuit",
     },
+    gate: {
+      placeholder: "ton@email.com",
+      submit: "Recevoir le lien",
+      loading: "Envoi…",
+      success: "Ouvrir sur le Chrome Web Store",
+      successHint: "Le lien est aussi dans ta boîte mail",
+      error: "Oups. Vérifie l'email et réessaie.",
+      privacy: "Pas de spam. 1 mail par mois, max.",
+    },
     who: {
       tag: "L'auteur",
       title: "Qui est Dirty Swift ?",
@@ -212,7 +230,7 @@ export const dict: Record<Lang, Dict> = {
     },
     hero: {
       kicker: "Chrome Extension",
-      kickerStatus: "In review",
+      kickerStatus: "Live",
       title1: "From digging",
       title2: "to buying,",
       title3: "in",
@@ -299,6 +317,15 @@ export const dict: Record<Lang, Dict> = {
       sub: "One-click install. Works on every Spotify and Deezer playlist or artist page.",
       ctaSoon: "Coming soon on Chrome Web Store",
       ctaLive: "Add to Chrome, free",
+    },
+    gate: {
+      placeholder: "you@email.com",
+      submit: "Get the link",
+      loading: "Sending…",
+      success: "Open on the Chrome Web Store",
+      successHint: "The link is also in your inbox",
+      error: "Oops. Check the email and try again.",
+      privacy: "No spam. 1 email per month, max.",
     },
     who: {
       tag: "The author",

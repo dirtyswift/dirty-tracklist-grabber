@@ -5,12 +5,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { Bars } from "@/components/bars";
+import { EmailGate } from "@/components/email-gate";
 import { useLang } from "@/lib/lang-provider";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const CHROME_STORE_URL = "#";
-const STORE_STATUS: "review" | "live" = "review";
 
 export function FinalCta() {
   const { t, lang } = useLang();
@@ -60,19 +58,9 @@ export function FinalCta() {
           >
             {t.cta.sub}
           </p>
-          <a
-            data-cta-anim
-            href={CHROME_STORE_URL}
-            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-lg font-semibold text-paper transition hover:bg-brand hover:text-ink"
-          >
-            {STORE_STATUS === "live" ? t.cta.ctaLive : t.cta.ctaSoon}
-            <span
-              aria-hidden
-              className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5"
-            >
-              →
-            </span>
-          </a>
+          <div data-cta-anim className="mt-10 flex w-full justify-center">
+            <EmailGate variant="cta" />
+          </div>
         </div>
       </div>
     </section>
