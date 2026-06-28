@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#FFE000"/>
+  <rect x="1.25" y="1.25" width="29.5" height="29.5" fill="none" stroke="#0A0A0A" stroke-width="2.5"/>
+  <text x="16" y="22.5" text-anchor="middle" font-family="Archivo, 'Arial Black', Impact, system-ui, sans-serif" font-weight="900" font-size="13" fill="#0A0A0A" letter-spacing="-0.9">VYBZ</text>
+</svg>

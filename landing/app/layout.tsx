@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { LabPromo } from "@/components/lab-promo";
 import { SmoothAnchors } from "@/components/smooth-anchors";
 import { LangProvider } from "@/lib/lang-provider";
 import "./globals.css";
@@ -60,6 +61,7 @@ export default function RootLayout({
         <LangProvider>
           <SmoothAnchors />
           {children}
+          <LabPromo />
         </LangProvider>
       </body>
     </html>

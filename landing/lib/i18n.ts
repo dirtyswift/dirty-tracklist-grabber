@@ -57,6 +57,10 @@ export type Dict = {
     p2: string;
     cta: string;
   };
+  labPromo: {
+    header: string;
+    close: string;
+  };
   footer: {
     byPre: string;
     byMid: string;
@@ -186,6 +190,10 @@ export const dict: Record<Lang, Dict> = {
       p1: "Plus de trente ans aux platines. Pionnier du Dirty South et de la Trap en France, il a ouvert pour Beyoncé & Jay-Z au Stade de France, puis pour DJ Snake à La Défense Arena. Auteur de Culture DJ chez Larousse, host du DMC World Championship 2024, fondateur de Playin' Paris.",
       p2: "À la radio sur Générations (Dirty Lab, 13h–16h, et Dirty Mix le samedi soir). Ses podcasts #MondayMix et #DirtyMix totalisent plus de 30 millions d'écoutes. Et entre deux sets, il code des outils comme celui-ci, parce que copier des titres à la main, c'est non.",
       cta: "dirtyswift.com",
+    },
+    labPromo: {
+      header: "Les autres outils Dirty Lab",
+      close: "Fermer",
     },
     footer: {
       byPre: "Construit par",
@@ -333,6 +341,10 @@ export const dict: Record<Lang, Dict> = {
       p1: "Over thirty years behind the decks. A pioneer of Dirty South and Trap in France, he opened for Beyoncé & Jay-Z at the Stade de France, then for DJ Snake at La Défense Arena. Author of Culture DJ (Larousse), host of the 2024 DMC World Championship, founder of Playin' Paris.",
       p2: "On the air on Générations (Dirty Lab, 1pm–4pm, and Dirty Mix on Saturday nights). His #MondayMix and #DirtyMix podcasts have racked up over 30 million plays. Between sets, he builds tools like this one, because copying titles by hand is a hard no.",
       cta: "dirtyswift.com",
+    },
+    labPromo: {
+      header: "Other Dirty Lab tools",
+      close: "Close",
     },
     footer: {
       byPre: "Built by",
