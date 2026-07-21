@@ -1,5 +1,10 @@
 import { AIRTABLE_BASE_ID, AIRTABLE_TABLE_ID } from "@/lib/constants";
 
+// Newsletters DirtyLab auxquelles chaque inscription Grabber abonne le contact.
+// Options existantes du champ `Newsletters` (table Dirty Newsletter) — dirtylab
+// utilise ces tags pour toutes les communications dirtyswift / req / vybz.
+const GRABBER_NEWSLETTERS = ["dirtyswift", "req", "vybz"];
+
 type SubscribeArgs = {
   email: string;
   lang: "fr" | "en";
@@ -33,6 +38,9 @@ export async function subscribeToNewsletter({
               Email: email,
               Source: "site-newsletter",
               Lang: lang,
+              Newsletters: GRABBER_NEWSLETTERS,
+              Confirmed: true,
+              "Confirmed at": new Date().toISOString(),
               "Created at": new Date().toISOString(),
               ...(userAgent ? { "User agent": userAgent } : {}),
               ...(ip ? { IP: ip } : {}),
