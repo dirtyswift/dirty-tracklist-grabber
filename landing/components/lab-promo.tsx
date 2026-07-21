@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/lang-provider";
 
 type LabItem = {
@@ -43,11 +43,32 @@ export function LabPromo() {
   const [closed, setClosed] = useState(false);
   // Apparition ~2 s après le chargement (slide-up + fade, sauf reduced-motion).
   const [shown, setShown] = useState(false);
+  const barRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShown(true), 2000);
     return () => window.clearTimeout(timer);
   }, []);
+
+  // Réserve la hauteur de la barre en bas de page pour ne jamais recouvrir
+  // le footer (icônes sociales, liens). Retirée à la fermeture / au démontage.
+  useEffect(() => {
+    if (closed || !shown) {
+      document.body.style.paddingBottom = "";
+      return;
+    }
+    const bar = barRef.current;
+    if (!bar) return;
+    const apply = () => {
+      document.body.style.paddingBottom = `${bar.offsetHeight}px`;
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => {
+      window.removeEventListener("resize", apply);
+      document.body.style.paddingBottom = "";
+    };
+  }, [shown, closed]);
 
   if (closed) return null;
 
@@ -55,6 +76,7 @@ export function LabPromo() {
     <>
       <style>{styles}</style>
       <aside
+        ref={barRef}
         className={`lab-promo${shown ? " lab-promo--shown" : ""}`}
         aria-label="Dirty Lab"
       >
