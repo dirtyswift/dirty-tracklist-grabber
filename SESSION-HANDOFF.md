@@ -3,6 +3,8 @@
 **Date :** 2026-07-21
 **Périmètre :** landing Next.js 16 (`grabber.dirtyswift.com`), déployée en Docker sur le VPS (`/root/dirty-tracklist-grabber`, container `grabber-landing`, reverse proxy Traefik).
 
+> **Checkpoint 2026-07-21 (rafraîchi) :** aucun changement de code depuis `c6acd16` (working tree propre). Le code REQ DODGER + reqdj.com + socials footer est déjà commité en local. **Reste à faire : push + déploiement prod** (voir « Prochaine action exacte »).
+
 ---
 
 ## ✅ Fait
